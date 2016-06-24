@@ -18,12 +18,12 @@
   </head>
 
   <body>
-    <h1 class='title'>BlueSecond WatchFace Configuration v1.4</h1>
+    <h1 class='title'>Blue Second WatchFace Configuration v1.0</h1>
 
     <div class='item-container'>
       <div class='item-container-content'>
         <div class='item'>
-            Configuration for blueSecond weatchface. For Pebble Classic only background black or white will be used, otherwise background will be black. Foreground color will be ignored.
+            For Pebble Classic only black or white background will be used, foreground color will be ignored. Removing the second on display will not change the layout but will save the battery.
         </div>
       </div>
     </div>
@@ -163,7 +163,7 @@
     };
 
     // Save for next launch
-    localStorage['version_id'] = 104;
+    localStorage['version_id'] = 100;
     localStorage['background_color'] = options['background_color'];
     localStorage['foreground_color'] = options['foreground_color'];
     localStorage['background2_color'] = options['background2_color'];
@@ -210,7 +210,7 @@
    var showSecondCheckbox = document.getElementById('show_second_checkbox');
    
     // Load any previously saved configuration, if available
-    if(localStorage['version_id'] == 104) {
+    if(localStorage['version_id'] == 100) {
       backgroundColorPicker.value = localStorage['background_color'];
       foregroundColorPicker.value = localStorage['foreground_color'];
     background2ColorPicker.value = localStorage['background2_color'];
