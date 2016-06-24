@@ -29,7 +29,7 @@
     </div>
 
     <div class='item-container'>
-      <div class='item-container-header'>Customizability</div>
+      <div class='item-container-header'>Second Line</div>
       <div class='item-container-content'>
         <label class='item'>
           Background Color
@@ -41,7 +41,7 @@
                 </label>
       </div>
       <div class='item-container-footer'>
-          Choose the app's background and text color.
+          Choose the app's background and text color for the middle line.
       </div>
     </div>
 
@@ -54,6 +54,9 @@
             <a name="tab-1" class="tab-button" value='f' id='tab-1-fr'>dd/mm/yy</a>
             <a name="tab-1" class="tab-button" value='i' id='tab-1-in'>yy/mm/dd</a>
         </div>
+    </div>
+    <div class='item-container-footer'>
+        Choose the date display format : US (mm/dd/yy), European (dd/mm/yy), International (yy/mm/dd).
     </div>
 </div>
 
@@ -90,7 +93,7 @@
     };
 
     // Save for next launch
-    localStorage['version_id'] = 100;
+    localStorage['version_id'] = 101;
     localStorage['background_color'] = options['background_color'];
     localStorage['foreground_color'] = options['foreground_color'];
     localStorage['date_format'] = options['date_format'];
@@ -125,7 +128,7 @@
     var foregroundColorPicker = document.getElementById('foreground_color_picker');
    
     // Load any previously saved configuration, if available
-    if(localStorage['version_id'] == 100) {
+    if(localStorage['version_id'] == 101) {
       backgroundColorPicker.value = localStorage['background_color'];
       foregroundColorPicker.value = localStorage['foreground_color'];
         if(localStorage['date_format'] == 0){
