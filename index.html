@@ -169,7 +169,7 @@
       'foreground3_color': foreground3ColorPicker.value,
       'date_format': dateFormatSelect,
       'show_second': showSecondCheckbox.checked,
-      'bt_vide': btVibeCheckbox.checked,
+      'bt_vibe': btVibeCheckbox.checked,
       'bt_con': btConCheckbox.checked,
       'bt_uncon': btUnconCheckbox.checked
       
@@ -186,7 +186,7 @@
     localStorage['foreground3_color'] = options['foreground3_color'];
     localStorage['date_format'] = options['date_format'];
     localStorage['show_second'] = options['show_second'];
-    localStorage['bt_vide'] = options['bt_vide'];
+    localStorage['bt_vibe'] = options['bt_vibe'];
     localStorage['bt_con'] = options['bt_con'];
     localStorage['bt_uncon'] = options['bt_uncon'];
     
@@ -237,7 +237,7 @@
       background3ColorPicker.value = localStorage['background3_color'];
       foreground3ColorPicker.value = localStorage['foreground3_color'];
       showSecondCheckbox.checked = JSON.parse(localStorage['show_second']);
-      btVibeCheckbox.checked = JSON.parse(localStorage['bt_vide']);
+      btVibeCheckbox.checked = JSON.parse(localStorage['bt_vibe']);
       btConCheckbox.checked = JSON.parse(localStorage['bt_con']);
       btUnconCheckbox.checked = JSON.parse(localStorage['bt_uncon']);
    
