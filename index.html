@@ -18,12 +18,12 @@
   </head>
 
   <body>
-    <h1 class='title'>BlueSecond WatchFace Configuration v1.2</h1>
+    <h1 class='title'>BlueSecond WatchFace Configuration v1.3</h1>
 
     <div class='item-container'>
       <div class='item-container-content'>
         <div class='item'>
-            Configuration for blueSecond weatchface. Notes : Color selection will not applied to Pebble Classic and Pebble Steel as they are black and white only.
+            Configuration for blueSecond weatchface. Notes : For Pebble Classic only background black or white will be used, otherwise background will be black. Foreground color will be ignored.
         </div>
       </div>
     </div>
@@ -32,34 +32,91 @@
       <div class='item-container-header'>First Line</div>
       <div class='item-container-content'>
         <label class='item'>
-          Background Color
-          <input id='background_color_picker' type='text' class='item-color item-color-normal' value='#000055'>
+        Background Color
+        <input id='background_color_picker' type='text' class='item-color item-color-normal' value='#0055AA'>
         </label>
         <label class='item'>
-            Text Color
-            <input id='foreground_color_picker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
-                </label>
+        Forground Color
+        <input id='foreground_color_picker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+        </label>
       </div>
       <div class='item-container-footer'>
           Choose the app's background and text color for the top line.
       </div>
     </div>
-
-
-<div class='item-container'>
-    <div class="item-container-header">Date Format</div>
-    <div class="item-container-content">
-        <div class="item tab-buttons" id='date_format'>
-            <a name="tab-1" class="tab-button" value='u' id='tab-1-us'>mm/dd/yy</a>
-            <a name="tab-1" class="tab-button" value='f' id='tab-1-fr'>dd/mm/yy</a>
-            <a name="tab-1" class="tab-button" value='i' id='tab-1-in'>yy/mm/dd</a>
+    
+    <div class='item-container'>
+        <div class='item-container-header'>Second Line</div>
+        <div class='item-container-content'>
+            <label class='item'>
+            Background Color
+            <input id='background2_color_picker' type='text' class='item-color item-color-normal' value='#0000AA'>
+            </label>
+            <label class='item'>
+            Foreground Color
+            <input id='foreground2_color_picker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Choose the app's background and foreground color for the middle line.
         </div>
     </div>
-    <div class='item-container-footer'>
-        Choose the date display format : US (mm/dd/yy), European (dd/mm/yy), International (yy/mm/dd).
+    <div class='item-container'>
+        <div class='item-container-header'>Third Line</div>
+        <div class='item-container-content'>
+            <label class='item'>
+            Background Color
+            <input id='background3_color_picker' type='text' class='item-color item-color-normal' value='#000055'>
+            </label>
+            <label class='item'>
+            Foreground Color
+            <input id='foreground3_color_picker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Choose the app's background and foreground color for the middle line.
+        </div>
     </div>
-</div>
 
+    <div class='item-container'>
+        <div class="item-container-header">Date Format</div>
+        <div class="item-container-content">
+            <div class="item tab-buttons" id='date_format'>
+                <a name="tab-1" class="tab-button" value='u' id='tab-1-us'>mm/dd/yy</a>
+                <a name="tab-1" class="tab-button" value='f' id='tab-1-fr'>dd/mm/yy</a>
+                <a name="tab-1" class="tab-button" value='i' id='tab-1-in'>yy/mm/dd</a>
+            </div>
+        </div>
+        <div class='item-container-footer'>
+            Choose the date display format : US (mm/dd/yy), European (dd/mm/yy), International (yy/mm/dd).
+        </div>
+    </div>
+
+    <div class='item-container'>
+        <div class='item-container-header'>Bluethoot</div>
+        <div class='item-container-content'>
+        <label class='item'>
+            Bluethooth Vibration
+            <input id='bt_vibe_checkbox' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            This enable bluethooth vibration on change state.
+        </div>
+    </div>
+    
+    <div class='item-container'>
+        <div class='item-container-header'>Display</div>
+        <div class='item-container-content'>
+            <label class='item'>
+            Show Second
+            <input id='show_second_checkbox' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            This enable the second on display.
+        </div>
+    </div>
 
     <div class='item-container'>
       <div class='button-container'>
@@ -83,20 +140,39 @@
   function getConfigData() {
     var backgroundColorPicker = document.getElementById('background_color_picker');
     var foregroundColorPicker = document.getElementById('foreground_color_picker');
+    var background2ColorPicker = document.getElementById('background2_color_picker');
+    var foreground2ColorPicker = document.getElementById('foreground2_color_picker');
+    var background3ColorPicker = document.getElementById('background3_color_picker');
+    var foreground3ColorPicker = document.getElementById('foreground3_color_picker');
     var dateFormatSelect = getDateFormatIndex();
+    var btVibeCheckbox = document.getElementById('bt_vibe_checkbox');
+    var showSecondCheckbox = document.getElementById('show_second_checkbox');
    
     var options = {
       'background_color': backgroundColorPicker.value,
       'foreground_color': foregroundColorPicker.value,
-      'date_format': dateFormatSelect
+      'background2_color': background2ColorPicker.value,
+      'foreground2_color': foreground2ColorPicker.value,
+      'background3_color': background3ColorPicker.value,
+      'foreground3_color': foreground3ColorPicker.value,
+      'date_format': dateFormatSelect,
+      'show_second': showSecondCheckbox.checked,
+      'bt_vide': btVibeCheckbox.checked
+      
 
     };
 
     // Save for next launch
-    localStorage['version_id'] = 102;
+    localStorage['version_id'] = 103;
     localStorage['background_color'] = options['background_color'];
     localStorage['foreground_color'] = options['foreground_color'];
+    localStorage['background2_color'] = options['background2_color'];
+    localStorage['foreground2_color'] = options['foreground2_color'];
+    localStorage['background3_color'] = options['background3_color'];
+    localStorage['foreground3_color'] = options['foreground3_color'];
     localStorage['date_format'] = options['date_format'];
+    localStorage['show_second'] = options['show_second'];
+    localStorage['bt_vide'] = options['bt_vide'];
     
     console.log('Got options: ' + JSON.stringify(options));
     return options;
@@ -126,11 +202,24 @@
   (function() {
     var backgroundColorPicker = document.getElementById('background_color_picker');
     var foregroundColorPicker = document.getElementById('foreground_color_picker');
+   var background2ColorPicker = document.getElementById('background2_color_picker');
+   var foreground2ColorPicker = document.getElementById('foreground2_color_picker');
+   var background3ColorPicker = document.getElementById('background3_color_picker');
+   var foreground3ColorPicker = document.getElementById('foreground3_color_picker');
+   var btVibeCheckbox = document.getElementById('bt_vibe_checkbox');
+   var showSecondCheckbox = document.getElementById('show_second_checkbox');
    
     // Load any previously saved configuration, if available
-    if(localStorage['version_id'] == 102) {
+    if(localStorage['version_id'] == 103) {
       backgroundColorPicker.value = localStorage['background_color'];
       foregroundColorPicker.value = localStorage['foreground_color'];
+    background2ColorPicker.value = localStorage['background2_color'];
+   foreground2ColorPicker.value = localStorage['foreground2_color'];
+   background3ColorPicker.value = localStorage['background3_color'];
+   foreground3ColorPicker.value = localStorage['foreground4_color'];
+   btVibeCheckbox.checked = localStorage['bt_vide'];
+   showSecondCheckbox.checked = localStorage['show_second'];
+   
         if(localStorage['date_format'] == 0){
             document.getElementById("tab-1-us").className += " active";
         }else if(localStorage['date_format'] == 1){
@@ -141,6 +230,8 @@
    
    }else{
         document.getElementById("tab-1-fr").className += " active";
+        btVibeCheckbox.checked = false;
+        showSecondCheckbox.checked = true;
    }
   })();
   </script>
