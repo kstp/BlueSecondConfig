@@ -18,7 +18,7 @@
   </head>
 
   <body>
-    <h1 class='title'>BlueSecond WatchFace Configuration v1.0</h1>
+    <h1 class='title'>BlueSecond WatchFace Configuration v1.1</h1>
 
     <div class='item-container'>
       <div class='item-container-content'>
@@ -33,7 +33,7 @@
       <div class='item-container-content'>
         <label class='item'>
           Background Color
-          <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='#0000AA'>
+          <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='#004387'>
         </label>
         <label class='item'>
             Text Color
@@ -93,7 +93,7 @@
     };
 
     // Save for next launch
-    localStorage['version_id'] = 101;
+    localStorage['version_id'] = 102;
     localStorage['background_color'] = options['background_color'];
     localStorage['foreground_color'] = options['foreground_color'];
     localStorage['date_format'] = options['date_format'];
@@ -128,7 +128,7 @@
     var foregroundColorPicker = document.getElementById('foreground_color_picker');
    
     // Load any previously saved configuration, if available
-    if(localStorage['version_id'] == 101) {
+    if(localStorage['version_id'] == 102) {
       backgroundColorPicker.value = localStorage['background_color'];
       foregroundColorPicker.value = localStorage['foreground_color'];
         if(localStorage['date_format'] == 0){
