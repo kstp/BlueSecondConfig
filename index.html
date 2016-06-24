@@ -82,13 +82,13 @@
         <div class="item-container-header">Date Format</div>
         <div class="item-container-content">
             <div class="item tab-buttons" id='date_format'>
-                <a name="tab-1" class="tab-button" value='u' id='tab-1-us'>mm/dd/yy</a>
-                <a name="tab-1" class="tab-button" value='f' id='tab-1-fr'>dd/mm/yy</a>
-                <a name="tab-1" class="tab-button" value='i' id='tab-1-in'>yy/mm/dd</a>
+                <a name="tab-1" class="tab-button" value='u' id='tab-1-us'>American<br>MM/DD/YY</a>
+                <a name="tab-1" class="tab-button" value='f' id='tab-1-fr'>European<br>DD/MM/YY</a>
+                <a name="tab-1" class="tab-button" value='i' id='tab-1-in'>Iso<br>YY-MM-DD</a>
             </div>
         </div>
         <div class='item-container-footer'>
-            Choose the date display format : US (mm/dd/yy), European (dd/mm/yy), International (yy/mm/dd).
+            Choose the date display format.
         </div>
     </div>
 
@@ -217,8 +217,8 @@
    foreground2ColorPicker.value = localStorage['foreground2_color'];
    background3ColorPicker.value = localStorage['background3_color'];
    foreground3ColorPicker.value = localStorage['foreground3_color'];
-   btVibeCheckbox.checked = localStorage['bt_vide'];
-   showSecondCheckbox.checked = localStorage['show_second'];
+   btVibeCheckbox.checked = JSON.parse(localStorage['bt_vide']);
+   showSecondCheckbox.checked = JSON.parse(localStorage['show_second']);
    
         if(localStorage['date_format'] == 0){
             document.getElementById("tab-1-us").className += " active";
