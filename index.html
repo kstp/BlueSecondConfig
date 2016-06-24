@@ -18,12 +18,12 @@
   </head>
 
   <body>
-    <h1 class='title'>Blue Second WatchFace Configuration v1.0</h1>
+    <h1 class='title'>Blue Second WatchFace Configuration v1.1</h1>
 
     <div class='item-container'>
       <div class='item-container-content'>
         <div class='item'>
-            For Pebble Classic only black or white background will be used, foreground color will be ignored. Removing the second on display will not change the layout but will save the battery.
+            For Pebble Classic only black or white background will be used, foreground color will be ignored. <br>Removing the second on display will not change the layout but will save the battery.
         </div>
       </div>
     </div>
@@ -82,26 +82,13 @@
         <div class="item-container-header">Date Format</div>
         <div class="item-container-content">
             <div class="item tab-buttons" id='date_format'>
-                <a name="tab-1" class="tab-button" value='u' id='tab-1-us'>American (MM/DD/YY)</a>
-                <a name="tab-1" class="tab-button" value='f' id='tab-1-fr'>European (DD/MM/YY)</a>
-                <a name="tab-1" class="tab-button" value='i' id='tab-1-in'>Iso (YY-MM-DD)</a>
+                <a name="tab-1" class="tab-button" value='u' id='tab-1-us'>American<br>(MM/DD/YY)</a>
+                <a name="tab-1" class="tab-button" value='f' id='tab-1-fr'>European<br>(DD/MM/YY)</a>
+                <a name="tab-1" class="tab-button" value='i' id='tab-1-in'>Iso<br>(YY-MM-DD)</a>
             </div>
         </div>
         <div class='item-container-footer'>
             Choose the date display format.
-        </div>
-    </div>
-
-    <div class='item-container'>
-        <div class='item-container-header'>Bluethoot</div>
-        <div class='item-container-content'>
-        <label class='item'>
-            Bluethooth Vibration
-            <input id='bt_vibe_checkbox' type='checkbox' class='item-toggle'>
-            </label>
-        </div>
-        <div class='item-container-footer'>
-            This enable bluethooth vibration on change state.
         </div>
     </div>
     
@@ -109,14 +96,37 @@
         <div class='item-container-header'>Display</div>
         <div class='item-container-content'>
             <label class='item'>
-            Show Second
-            <input id='show_second_checkbox' type='checkbox' class='item-toggle'>
-            </label>
+                Show Second
+                <input id='show_second_checkbox' type='checkbox' class='item-toggle'>
+                    </label>
         </div>
         <div class='item-container-footer'>
             This enable the second on display.
         </div>
     </div>
+    
+    <div class='item-container'>
+        <div class='item-container-header'>Bluetooth</div>
+        <div class='item-container-content'>
+        <label class='item'>
+            Vibration
+            <input id='bt_vibe_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+        <label class='item'>
+            Connected Image
+            <input id='bt_con_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+        <label class='item'>
+            Unconnected Image
+            <input id='bt_uncon_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+        </div>
+        <div class='item-container-footer'>
+            Choose bluetooth option.<br>-Vibration on connection state change.<br>-Display image for connected state.<br>-Display image for unconnected state.
+        </div>
+    </div>
+    
+    
 
     <div class='item-container'>
       <div class='button-container'>
@@ -145,8 +155,10 @@
     var background3ColorPicker = document.getElementById('background3_color_picker');
     var foreground3ColorPicker = document.getElementById('foreground3_color_picker');
     var dateFormatSelect = getDateFormatIndex();
-    var btVibeCheckbox = document.getElementById('bt_vibe_checkbox');
     var showSecondCheckbox = document.getElementById('show_second_checkbox');
+    var btVibeCheckbox = document.getElementById('bt_vibe_checkbox');
+    var btConCheckbox = document.getElementById('bt_con_checkbox');
+    var btUnconCheckbox = document.getElementById('bt_uncon_checkbox');
    
     var options = {
       'background_color': backgroundColorPicker.value,
@@ -157,13 +169,15 @@
       'foreground3_color': foreground3ColorPicker.value,
       'date_format': dateFormatSelect,
       'show_second': showSecondCheckbox.checked,
-      'bt_vide': btVibeCheckbox.checked
+      'bt_vide': btVibeCheckbox.checked,
+      'bt_con': btConCheckbox.checked,
+      'bt_uncon': btUnconCheckbox.checked
       
 
     };
 
     // Save for next launch
-    localStorage['version_id'] = 100;
+    localStorage['version_id'] = 101;
     localStorage['background_color'] = options['background_color'];
     localStorage['foreground_color'] = options['foreground_color'];
     localStorage['background2_color'] = options['background2_color'];
@@ -173,6 +187,8 @@
     localStorage['date_format'] = options['date_format'];
     localStorage['show_second'] = options['show_second'];
     localStorage['bt_vide'] = options['bt_vide'];
+    localStorage['bt_con'] = options['bt_con'];
+    localStorage['bt_uncon'] = options['bt_uncon'];
     
     console.log('Got options: ' + JSON.stringify(options));
     return options;
@@ -202,23 +218,28 @@
   (function() {
     var backgroundColorPicker = document.getElementById('background_color_picker');
     var foregroundColorPicker = document.getElementById('foreground_color_picker');
-   var background2ColorPicker = document.getElementById('background2_color_picker');
-   var foreground2ColorPicker = document.getElementById('foreground2_color_picker');
-   var background3ColorPicker = document.getElementById('background3_color_picker');
-   var foreground3ColorPicker = document.getElementById('foreground3_color_picker');
-   var btVibeCheckbox = document.getElementById('bt_vibe_checkbox');
-   var showSecondCheckbox = document.getElementById('show_second_checkbox');
+    var background2ColorPicker = document.getElementById('background2_color_picker');
+    var foreground2ColorPicker = document.getElementById('foreground2_color_picker');
+    var background3ColorPicker = document.getElementById('background3_color_picker');
+    var foreground3ColorPicker = document.getElementById('foreground3_color_picker');
+    var showSecondCheckbox = document.getElementById('show_second_checkbox');
+    var btVibeCheckbox = document.getElementById('bt_vibe_checkbox');
+    var btConCheckbox = document.getElementById('bt_con_checkbox');
+    var btUnconCheckbox = document.getElementById('bt_uncon_checkbox');
+
    
     // Load any previously saved configuration, if available
-    if(localStorage['version_id'] == 100) {
+    if(localStorage['version_id'] == 101) {
       backgroundColorPicker.value = localStorage['background_color'];
       foregroundColorPicker.value = localStorage['foreground_color'];
-    background2ColorPicker.value = localStorage['background2_color'];
-   foreground2ColorPicker.value = localStorage['foreground2_color'];
-   background3ColorPicker.value = localStorage['background3_color'];
-   foreground3ColorPicker.value = localStorage['foreground3_color'];
-   btVibeCheckbox.checked = JSON.parse(localStorage['bt_vide']);
-   showSecondCheckbox.checked = JSON.parse(localStorage['show_second']);
+      background2ColorPicker.value = localStorage['background2_color'];
+      foreground2ColorPicker.value = localStorage['foreground2_color'];
+      background3ColorPicker.value = localStorage['background3_color'];
+      foreground3ColorPicker.value = localStorage['foreground3_color'];
+      showSecondCheckbox.checked = JSON.parse(localStorage['show_second']);
+      btVibeCheckbox.checked = JSON.parse(localStorage['bt_vide']);
+      btConCheckbox.checked = JSON.parse(localStorage['bt_con']);
+      btUnconCheckbox.checked = JSON.parse(localStorage['bt_uncon']);
    
         if(localStorage['date_format'] == 0){
             document.getElementById("tab-1-us").className += " active";
@@ -230,8 +251,11 @@
    
    }else{
         document.getElementById("tab-1-fr").className += " active";
-        btVibeCheckbox.checked = false;
         showSecondCheckbox.checked = true;
+        btVibeCheckbox.checked = false;
+        btConCheckbox.checked = true;
+        btUnconCheckbox.checked = false;
+
    }
   })();
   </script>
