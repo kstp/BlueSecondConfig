@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Rachet WatchFace Configuration</title>
+  <title>Blue Second WatchFace Configuration</title>
   <link rel='stylesheet' type='text/css' href='css/slate.min.css'>
   <script src='js/slate.min.js'></script>
   <style>
@@ -18,12 +18,12 @@
   </head>
 
   <body>
-    <h1 class='title'>Rachet WatchFace Configuration v1.0</h1>
+    <h1 class='title'>BlueSecond WatchFace Configuration v1.0</h1>
 
     <div class='item-container'>
       <div class='item-container-content'>
         <div class='item'>
-          Use this configuration page to choose the settings you would like applied to Rachet.
+            Configuration for blueSecond weatchface. Notes : Color selection will not applied to Pebble Classic and Pebble Steel as they are black and white only.
         </div>
       </div>
     </div>
@@ -47,11 +47,12 @@
 
 
 <div class='item-container'>
-    <div class="item-container-header">Temperature Scale</div>
+    <div class="item-container-header">Date Format</div>
     <div class="item-container-content">
-        <div class="item tab-buttons" id='scale_select'>
-            <a name="tab-1" class="tab-button" value='c' id='tab-1-c'>Celcius</a>
-            <a name="tab-1" class="tab-button" value='f' id='tab-1-f'>Fahrenheit</a>
+        <div class="item tab-buttons" id='date_format'>
+            <a name="tab-1" class="tab-button" value='u' id='tab-1-us'>mm/dd/yy</a>
+            <a name="tab-1" class="tab-button" value='f' id='tab-1-fr'>dd/mm/yy</a>
+            <a name="tab-1" class="tab-button" value='i' id='tab-1-in'>yy/mm/dd</a>
         </div>
     </div>
 </div>
@@ -65,7 +66,7 @@
   </body>
   
   <script>
-      function getTemperatureFormatIndex() {
+      function getDateFormatIndex() {
           var tabs = document.getElementsByName("tab-1");
           for(var t = 0; t < tabs.length; t++) {
               var tbclasses = tabs[t].className.split(" ");
@@ -79,19 +80,19 @@
   function getConfigData() {
     var backgroundColorPicker = document.getElementById('background_color_picker');
     var foregroundColorPicker = document.getElementById('foreground_color_picker');
-    var scaleSelect = getTemperatureFormatIndex();
+    var dateFormatSelect = getDateFormatIndex();
    
     var options = {
       'background_color': backgroundColorPicker.value,
       'foreground_color': foregroundColorPicker.value,
-      'wheater_scale': scaleSelect
+      'date_format': dateFormatSelect
 
     };
 
     // Save for next launch
     localStorage['background_color'] = options['background_color'];
     localStorage['foreground_color'] = options['foreground_color'];
-    localStorage['wheater_scale'] = options['wheater_scale'];
+    localStorage['date_format'] = options['date_format'];
     
     console.log('Got options: ' + JSON.stringify(options));
     return options;
@@ -121,18 +122,21 @@
   (function() {
     var backgroundColorPicker = document.getElementById('background_color_picker');
     var foregroundColorPicker = document.getElementById('foreground_color_picker');
-    //var scaleSelect = document.getElementById('scale_select');
-
+   
     // Load any previously saved configuration, if available
-    if(localStorage['wheater_scale']) {
+    if(localStorage['background_color']) {
       backgroundColorPicker.value = localStorage['background_color'];
       foregroundColorPicker.value = localStorage['foreground_color'];
-        if(localStorage['wheater_scale'] == 0){
-            document.getElementById("tab-1-c").className += " active";
+        if(localStorage['date_format'] == 0){
+            document.getElementById("tab-1-us").className += " active";
+        }else if(localStorage['date_format'] == 1){
+            document.getElementById("tab-1-fr").className += " active";
         }else{
-            document.getElementById("tab-1-f").className += " active";
+            document.getElementById("tab-1-in").className += " active";
         }
    
+   }else{
+        document.getElementById("tab-1-fr").className += " active";
    }
   })();
   </script>
